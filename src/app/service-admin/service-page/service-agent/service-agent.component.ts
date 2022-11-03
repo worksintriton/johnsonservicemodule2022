@@ -72,4 +72,11 @@ detail:any;
   showWarning(msg) {
       this.toastr.warningToastr(msg);
   }
+
+
+  Viewdetails(item:any){
+    this.detail=item;
+    this.router.navigate(['/service-admin/service-add-admin'])
+    sessionStorage.setItem('employeeDetail', JSON.stringify(this.detail));
+  }
 }

@@ -46,21 +46,22 @@
             <!-- <th class="th-1">
                 S.No
             </th> -->
-            <th style=" width: 150px ">Employee Name</th>
-            <th style=" width: 150px "> Personal Phone</th>
-            <th style=" width: 150px ">Employee Phone</th>
-            <th style="width: 150px ">Introduced By</th>
-            <th style=" width: 150px ">Email id</th>
-            <th style=" width: 150px ">Location Name</th>
-            <th style="width: 150px ">Mobile Model</th>
-            <th style=" width: 150px ">Device Number</th>
-            <th style=" width: 150px ">Mobile Os</th>
-            <th style=" width: 150px "> Password</th>
-            <th style=" width: 150px ">Status</th>
-            <th style=" width: 150px ">Last Login Time</th>
-            <th style=" width: 150px ">Last Logout Time</th>
+            <th style=" width: 150px ">Emp Name</th>
+            <!-- <th style=" width: 150px "> Personal Phone</th> -->
+            <th style=" width: 150px ">Emp Phone</th>
+            <!-- <th style="width: 150px ">Introduced By</th> -->
+            <!-- <th style=" width: 150px ">Email id</th> -->
+            <th style=" width: 100px ">Location Name</th>
+            <!-- <th style="width: 150px ">Mobile Model</th> -->
+            <th style=" width: 100px ">Emp type</th>
+            <th style=" width: 100px ">Device Number</th>
+            <!-- <th style=" width: 150px ">Mobile Os</th> -->
+            <!-- <th style=" width: 150px "> Password</th> -->
+            <th style=" width: 100px ">Status</th>
+            <th style=" width: 100px ">Last Login Time</th>
+            <th style=" width: 100px ">Last Logout Time</th>
             <!-- <th>Created at</th> -->
-            <th style="width: 163px;text-align:center">
+            <th style="width: 120px;text-align:center">
                 Action
             </th>
         </tr>
@@ -69,25 +70,25 @@
       <tr class="tdrow">
             
         <td>{{item.user_name}}</td>
-            <td>{{item.user_per_mob}}</td>
+            <!-- <td>{{item.user_per_mob}}</td> -->
             <td>{{item.user_mobile_no}}</td>
-      <td>{{item.user_introduced_by}}</td>
-            <td>{{item.user_email}}</td>
+      <!-- <td>{{item.user_introduced_by}}</td> -->
+            <!-- <td>{{item.user_email}}</td> -->
             <td>{{item.user_location}}</td>
-            <td>{{item.user_mob_model}}</td>
+            <td>{{item.emp_type}}</td>
             <td>{{item.device_no}}</td>
-            <td>{{item.user_mob_os}}</td>
-            <td>{{item.user_password}}</td>
+            <!-- <td>{{item.user_mob_os}}</td> -->
+            <!-- <td>{{item.user_password}}</td> -->
             <!-- <td>{{item.user_mob_make}}</td> -->
             <td>{{item.status}}</td>
-            <td>{{item.last_login_time}}</td>
-            <td>{{item.last_logout_time}}</td>
+            <td>{{item.last_login_time | date }}</td>
+            <td>{{item.last_logout_time | date}}</td>
             <!-- <td>{{item.reg_date_time}}</td> -->
   
             <td class="act">
                 <i style="color: #2196f3;" class="fas fa-edit" aria-hidden="true"  pTooltip="Edit" (click)="Editcompanydetailsdata(item)"></i>
                 <i style="color: #fd2c3a;" class="fa fa-trash" aria-hidden="true" pTooltip="Delete" (click)="Deletecompanydetails(item)"></i>
-                <!-- <i style="color: #4CAF50;" class="fa fa-info-circle" aria-hidden="true" pTooltip="View"></i> -->
+                <i *ngIf="item.emp_type == 'Engineer'" style="color: #4CAF50;" class="fa fa-info-circle" aria-hidden="true" pTooltip="Admin Dashboard" (click)="Viewdetails(item)"></i>
             </td>
         </tr>
     </ng-template>

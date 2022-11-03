@@ -62,3 +62,9 @@ input:checked + .slider:before {
     border-right: 2px solid #dcdcdc;
 }
 
+body .ui-paginator .ui-paginator-current {
+  color: #333333;
+  height: 2.286em;
+  min-width: 36.286em !important;
+  line-height: 2.286em;
+}

@@ -39,12 +39,23 @@ submitted :boolean=false;
       {"name": "InActive",}, 
       {"name": "Delete", }, 
       {"name": "Suspend",}, ];
+
+      emptype =  [ 
+        {"name": "Engineer"}, 
+        {"name": "Mechanic"}, 
+       ];
+
       empname:boolean=false;
       loc:boolean=false;
-   
+      search_word = '';
+
+      emp_type_value = {"name": "Mechanic"};
+     
+      active_value =  {"name": "Active",};
      
   constructor(private router:Router, private formBuilder: FormBuilder,private toastr:ToastrManager,private _api: ApiService,) { 
     this.employeeForm = this.formBuilder.group({
+        emp_type:[''],
         _id:[''],
         user_name:['',Validators.required],
         user_per_mob:['',],
@@ -56,19 +67,25 @@ submitted :boolean=false;
         // custom_field2:[''],
        mobile_issue_date:[new Date()],
        user_location:['',Validators.required],
-       user_mob_model:['',Validators.required],
+       user_mob_model:['0',Validators.required],
        user_mob_os:['',Validators.required],
-       user_mob_make:['',Validators.required],
+       user_mob_make:['TAB',Validators.required],
        device_no:['',Validators.required], 
        organisation_name:['Johnson Lifts Private Limited',Validators.required],
        Documents:[''],
         status:['',Validators.required],
-        user_password:['',Validators.required]    })
+        user_password:['',Validators.required]    
+      })
  
-
+       
   }
 
   ngOnInit(): void {
+
+
+
+
+
     this._api.getBranchList().subscribe((response: any) => {
       this.branchList=response['Data'];
       this.branchList.forEach((key, value) => {
@@ -78,6 +95,9 @@ submitted :boolean=false;
       });
       console.log(this.countries);
     })
+    this.emp_type_value = {"name": "Mechanic"};
+    this.mobile_os = {"name": "Android Jelly Bean",};
+    this.active_value =  {"name": "Active",};
     var editEmp=JSON.parse(sessionStorage.getItem('editemployee')|| '{}');
     if(editEmp==true){
       this.addmode=false;
@@ -120,14 +140,19 @@ this.loc=true;
     return this.employeeForm.controls;
   }
   Insert_employee(){
-    console.log(this.employeeForm.value)
+    console.log(this.employeeForm.value);
+    var enterdata = this.employeeForm.value;
+    var emptype = enterdata?.emp_type.name
+
     this.employeeForm.patchValue({
-      user_mob_os:this.mobile_os?.name,
-      status:this.stat?.name,
+      user_mob_os:this.mobile_os.name,
+      status:this.active_value.name,
+      emp_type:this.emp_type_value.name,
     })
     console.log(this.employeeForm.value)
     this.submitted=true;
     if(this.employeeForm.valid){
+      console.log(this.employeeForm.value);
       this._api.service_employee(this.employeeForm.value).subscribe((response: any) => {
         console.log(response)
        if(response['Status']=="Success")
@@ -190,9 +215,13 @@ else{
         //     user_location:bb.name
         //   })
         // }
+
+        var enterdata = this.employeeForm.value;
+        var emptype = enterdata?.emp_type.name
         this.employeeForm.patchValue({
-          user_mob_os:this.mobile_os?.name,
-          status:this.stat?.name,
+          user_mob_os:this.mobile_os.name,
+          status:this.active_value.name,
+          emp_type:this.emp_type_value.name,
         })
      
      
@@ -227,6 +256,25 @@ else{
       }
 
 
-
+      search_key(){
+        console.log(this.search_word);
+        let a = {
+         EMPID : this.search_word
+        }
+        this._api.search_service_employee(a).subscribe((response: any) => {
+        console.log(response);
+        if(response.Code == 200){
+         this.employeeForm.controls['user_per_mob'].setValue(response.Data.TELENO);
+         this.employeeForm.controls['user_mobile_no'].setValue(response.Data.TELENO);
+         this.employeeForm.controls['user_id'].setValue(response.Data.EMPID);
+         this.employeeForm.controls['user_name'].setValue(response.Data.EMPNAME);
+         this.employeeForm.controls['user_location'].setValue(response.Data.BRANCH);
+         this.employeeForm.controls['device_no'].setValue(response.Data.INSTNO);
+         this.employeeForm.controls['mobile_issue_date'].setValue(response.Data.FROMDATE);
+        } else{
+          alert('No Record Found');
+        }
+        });
+     }
       
 }

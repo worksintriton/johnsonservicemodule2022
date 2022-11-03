@@ -8,6 +8,16 @@
 
     </div>
     <div class="row row-sm">
+        <div class="col-lg-12">
+        <div class="card custom-card">
+        <div class="card-body">
+        <input class="" style="height: 28px;"  placeholder="Search Emp ID" name="search_word" [(ngModel)]="search_word">
+        <button class="btn btn-primary" (click)="search_key()">Search</button>
+        </div>
+        </div>
+        </div>
+    </div>
+    <div class="row row-sm">
 
         <div class="col-lg-12">
             <div class="card custom-card">
@@ -37,10 +47,20 @@
                                         <span *ngIf="f.user_id.errors.required">Employee Id is required</span>
                                      </span>
                                 </div>
+
+                                <div class="col-md-4">
+                                    <h5 class="form-lable required">Employee Type</h5>
+                                    <p-dropdown [options]="emptype" placeholder="Employee Type" optionLabel="name" [(ngModel)]="emp_type_value"  formControlName="emp_type" dataKey="name" [showClear]="true"
+                                        [ngClass]="{ 'is-invalid': submitted && f.emp_type.errors }"></p-dropdown>
+                                        <span *ngIf="submitted && f.emp_type.errors" class="invalid-feedback">
+                                            <span *ngIf="f.emp_type.errors.required">Employee Type is required</span>
+                                         </span>
+                                </div>
+
                                 <div class="col-md-4">
                                     <h5 class="form-lable">Personal Phone</h5>
                                     <input type="number" pInputText name="user_per_mob" formControlName="user_per_mob" placeholder="Personal Phone" maxlength="10"
-                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" >
                                 </div>
                                 <div class="col-md-4">
                                     <h5 class="form-lable required">Employee Phone</h5>
@@ -138,7 +158,7 @@
                                 <div class="col-md-4">
                                     <h5 class="form-lable required">Status</h5>
                                     <p-dropdown [options]="status" placeholder="Status" optionLabel="name" formControlName="status" dataKey="name" [showClear]="true"
-                                        [(ngModel)]="stat" [ngClass]="{ 'is-invalid': submitted && f.status.errors }"></p-dropdown>
+                                        [(ngModel)]="active_value" [ngClass]="{ 'is-invalid': submitted && f.status.errors }"></p-dropdown>
                                         <span *ngIf="submitted && f.status.errors" class="invalid-feedback">
                                             <span *ngIf="f.status.errors.required">Status is required</span>
                                          </span>

@@ -9,7 +9,7 @@ import { ServiceAdminComponent } from './service-admin/service-admin.component';
 
 const routes: Routes = [
   // { path: '', pathMatch: 'full', redirectTo: 'login', },
-{ path: '', pathMatch: 'full', redirectTo: 'home', },
+{ path: '', pathMatch: 'full', redirectTo: 'service-login', },
 { path: 'login', component: LoginComponent, },
   { path: 'home', component: HomeComponent, },
   { path: 'service-login', component: ServiceLoginComponent, },

@@ -375,6 +375,16 @@ export class ApiService {
       employee_edit(data) {
         return this.http.post(this.apiUrl + 'service_userdetails/edit', data);
       }
+
+
+       search_service_employee(data){
+        return this.http.post(this.apiUrl + 'service_userdetails/search_service_employee', data);
+      }
+
+
+
+
+
 //attendance
 agent_attendence() {
   return this.http.get(this.apiUrl + 'service_attendance/getlist');
@@ -435,6 +445,23 @@ fetch_breakdown_job_detail(data){
   return this.http.post(this.apiUrl + 'service_userdetails/fetch_breakdown_job_detail', data);
 }
 
+
+
+//Add Admin ( Role Access To )
+getEmpDetails(data) {
+  // var link ="http://smart.johnsonliftsltd.com:3000/api/service_sub_admin/fetch_data"
+  return this.http.post(this.apiUrl + 'service_sub_admin/fetch_data', data);
+}
+
+createservice_sub_admin(data){
+  // var link ="http://smart.johnsonliftsltd.com:3000/api/service_sub_admin/create"
+  return this.http.post(this.apiUrl + 'service_sub_admin/create', data);
+}
+
+updateservice_sub_admin(data){
+  // var link ="http://smart.johnsonliftsltd.com:3000/api/service_sub_admin/edit"
+  return this.http.post(this.apiUrl + 'service_sub_admin/edit', data);
+}
 
 
 
